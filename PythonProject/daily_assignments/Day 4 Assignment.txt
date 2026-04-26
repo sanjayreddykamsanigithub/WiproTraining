@@ -1,0 +1,146 @@
+QUESTION 1:
+
+Use class, objects, constructors while coding 
+
+Bank Account Management System 
+You are tasked with creating a simple bank account management system in Python. 
+Implement a class called BankAccount with the following specifications: 
+
+The class should have private instance variables for account number, account holder name, and balance. 
+
+Include a constructor to initialize these variables. 
+
+Implement getter and setter methods for each instance variable to ensure encapsulation. 
+
+Implement methods to deposit and withdraw money from the account. 
+
+Ensure that the withdraw method checks if the account has sufficient balance before allowing withdrawal. 
+Write a Python program to demonstrate the functionality of the BankAccount class by creating instances, depositing and withdrawing money, and displaying account information. 
+
+
+PROGRAM:
+
+class BankAccount:
+    def __init__(self, account_number, account_holder, balance):
+        self.__account_number = account_number
+        self.__account_holder = account_holder
+        self.__balance = balance
+    def get_account_holder(self):
+        return self.__account_number
+    def get_account_holder(self):
+        return self.__account_holder
+    def get_balance(self):
+        return self.__balance
+    def set_account_holder(self, name):
+        self.__account_holder = name
+    def set_balance(self, balance):
+        if balance >= 0:
+            self.__balance = balance
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            print("Deposited:", amount)
+        else:
+            print("Invalid deposit amount")
+    def withdraw(self, amount):
+        if amount > self.__balance:
+            print("Insufficient balance")
+        elif amount <= 0:
+            print("Invalid withdrawl amount")
+        else:
+            self.__balance -= amount
+            print("Withdrawn:", amount)
+    def display(self):
+        print("\nAccount Details:")
+        print("Account Number:", self.__account_number)
+        print("Balance:", self.__balance)
+account1 = BankAccount(101, "Sanjay", 1000)
+account1.display()
+account1.deposit(500)
+account1.withdraw(300)
+account1.withdraw(1500)
+account1.display()
+
+OUTPUT:  
+
+Account Details:
+Account Number: 101
+Balance: 1000
+Deposited: 500
+Withdrawn: 300
+Insufficient balance
+
+Account Details:
+Account Number: 101
+Balance: 1200
+
+
+QUESTION 2:
+
+Employee Management System 
+You are developing an employee management system for a company. 
+Implement a class called Employee with the following specifications: 
+
+The class should have private instance variables for employee ID, name, and salary. Include a constructor to initialize these variables. 
+
+Implement getter and setter methods for each instance variable. 
+
+Implement a method to display employee information. 
+
+Implement a method to give a salary hike to an employee. 
+
+The method should accept a percentage value by which the salary will be increased. 
+Write a Python program to demonstrate the functionality of the Employee class by creating instances, displaying employee information, giving salary hikes, and displaying updated employee information. 
+
+
+PROGRAM:
+
+class Employee:
+    def __init__(self, emp_id, name, salary):
+        self.__empid = emp_id
+        self.__name = name
+        self.__salary = salary
+    def get_emp_id(self):
+        return self.__empid
+    def get_name(self):
+        return self.__name
+    def get_salary(self):
+        return self.__salary
+    def set_name(self, name):
+        self.__name = name
+    def set_salary(self, salary):
+        if salary >= 0:
+            self.__salary = salary
+        else:
+            print("Invalid salary")
+    def display(self):
+        print("\nEmployee Details:")
+        print("ID:", self.__empid)
+        print("Name:", self.__name)
+        print("Salary:", self.__salary)
+    def apply_hike(self, percentage):
+        if percentage > 0:
+            hike_amount = self.__salary * (percentage / 100)
+            self.__salary += hike_amount
+            print(f"Salary increased by {percentage}%")
+        else:
+            print("Invalid percentage")
+emp1 = Employee(1, "Sanjay", 20000)
+emp1.display()
+emp1.apply_hike(10)
+emp1.display()
+emp1.apply_hike(-5)
+
+OUTPUT:  
+
+Employee Details:
+ID: 1
+Name: Sanjay
+Salary: 20000
+Salary increased by 10%
+
+Employee Details:
+ID: 1
+Name: Sanjay
+Salary: 22000.0
+Invalid percentage
