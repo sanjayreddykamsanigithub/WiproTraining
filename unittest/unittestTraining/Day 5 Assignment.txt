@@ -1,0 +1,153 @@
+QUESTION 1:
+
+Basic Test Function   
+Write a pytest test function that checks whether the sum of two numbers (3 and 5) 
+equals 8. 
+
+PROGRAM:
+
+def test_sum():
+    assert 3 + 5 == 8
+
+OUTPUT:
+
+Bash
+pytest test_sum.py
+
+=================================================================== test session starts ====================================================================
+platform win32 -- Python 3.14.4, pytest-9.0.3, pluggy-1.6.0
+rootdir: C:\Wipro Trainee\unittest\unittestTraining\assignment
+collected 1 item                                                                                                                                            
+
+test_sum.py .                                                                                                                                         [100%]
+
+==================================================================== 1 passed in 0.01s =====================================================================
+QUESTION 2:
+
+Assertion Failure   
+Create a pytest test that intentionally fails by asserting that "hello".upper() equals 
+"hello".
+
+PROGRAM:
+
+def test_uppercase_fail():
+    assert "hello".upper() == "hello"
+
+OUTPUT:
+
+Bash
+pytest test_assertion_fail.py
+
+=================================================================== test session starts ====================================================================
+platform win32 -- Python 3.14.4, pytest-9.0.3, pluggy-1.6.0
+rootdir: C:\Wipro Trainee\unittest\unittestTraining\assignment
+collected 1 item                                                                                                                                            
+
+test_assertion_fail.py F                                                                                                                              [100%]
+
+========================================================================= FAILURES =========================================================================
+___________________________________________________________________ test_uppercase_fail ____________________________________________________________________
+
+    def test_uppercase_fail():
+>       assert "hello".upper() == "hello"
+E       AssertionError: assert 'HELLO' == 'hello'
+E         
+E         - hello
+E         + HELLO
+
+test_assertion_fail.py:2: AssertionError
+================================================================= short test summary info ==================================================================
+FAILED test_assertion_fail.py::test_uppercase_fail - AssertionError: assert 'HELLO' == 'hello'
+==================================================================== 1 failed in 0.10s ===================================================================
+QUESTION 3:
+
+Fixture Usage   
+Define a pytest fixture that returns a list of numbers [1, 2, 3]. Write a test that uses this 
+fixture to verify the list length is 3. 
+
+PROGRAM:
+
+import pytest
+
+@pytest.fixture
+def number_list():
+    return [1, 2, 3]
+
+def test_list_length(number_list):
+    assert len(number_list) == 3
+
+OUTPUT:
+
+Bash
+pytest test_fixture.py
+
+=================================================================== test session starts ====================================================================
+platform win32 -- Python 3.14.4, pytest-9.0.3, pluggy-1.6.0
+rootdir: C:\Wipro Trainee\unittest\unittestTraining\assignment
+collected 1 item                                                                                                                                            
+
+test_fixture.py .                                                                                                                                     [100%]
+
+==================================================================== 1 passed in 0.01s =====================================================================
+QUESTION 4:
+
+Parameterized Test   
+Use @pytest.mark.parametrize to test a function square(x) for inputs 2, 3, 4 and 
+expected outputs 4, 9, 16.
+
+PROGRAM:
+
+import pytest
+
+def square(x):
+    return x * x
+
+@pytest.mark.parametrize("num, expected", [
+    (2, 4),
+    (3, 9),
+    (4, 16)
+])
+def test_square(num, expected):
+    assert square(num) == expected
+
+OUTPUT:
+
+Bash
+pytest test_parameterized.py
+
+=================================================================== test session starts ====================================================================
+platform win32 -- Python 3.14.4, pytest-9.0.3, pluggy-1.6.0
+rootdir: C:\Wipro Trainee\unittest\unittestTraining\assignment
+collected 3 items                                                                                                                                           
+
+test_parameterized.py ...                                                                                                                             [100%]
+
+==================================================================== 3 passed in 0.01s ====================================================================
+QUESTION 5:
+
+Exception Handling   
+Write a pytest test that verifies a ZeroDivisionError is raised when dividing by zero using 
+pytest.raises.
+
+PROGRAM:
+
+import pytest
+
+def test_zero_division():
+    with pytest.raises(ZeroDivisionError):
+        result = 10 / 0
+
+OUTPUT:
+
+Bash
+pytest test_exception.py
+
+=================================================================== test session starts ====================================================================
+platform win32 -- Python 3.14.4, pytest-9.0.3, pluggy-1.6.0
+rootdir: C:\Wipro Trainee\unittest\unittestTraining\assignment
+collected 1 item                                                                                                                                            
+
+test_exception.py .                                                                                                                                   [100%]
+
+==================================================================== 1 passed in 0.03s =====================================================================
+
