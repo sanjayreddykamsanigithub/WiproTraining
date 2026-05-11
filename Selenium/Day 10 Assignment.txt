@@ -1,0 +1,227 @@
+PROGRAM 1:
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+# Launch Chrome browser
+driver = webdriver.Chrome()
+
+# Open Amazon homepage
+driver.get("https://www.amazon.in")
+
+# Maximize browser
+driver.maximize_window()
+
+# Capture title
+title = driver.title
+print("Page Title:", title)
+
+# Verify title contains Amazon
+assert "Amazon" in title, "Amazon title verification failed"
+
+# Wait for page load
+time.sleep(6)
+
+# Navigate to Mobiles category
+driver.find_element(By.LINK_TEXT, "Mobiles").click()
+
+# Wait for mobiles page
+time.sleep(5)
+
+# Go back to homepage
+driver.back()
+
+# Wait for homepage
+time.sleep(5)
+
+# Close browser
+driver.quit()
+
+OUTPUT:
+
+(.venv) PS C:\Wipro Trainee\Selenium\AssignmentCodes\AmazonAssignment> python AmazonAutomation.py   
+Page Title: Amazon.in
+
+
+PROGRAM 2:
+
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Launch browser
+driver = webdriver.Chrome()
+driver.maximize_window()
+
+# Open Amazon
+driver.get("https://www.amazon.in")
+
+# Wait until search bar is visible
+wait = WebDriverWait(driver, 15)
+search_box = wait.until(
+    EC.visibility_of_element_located((By.ID, "twotabsearchtextbox"))
+)
+
+# Enter product
+search_box.send_keys("Wireless Headphones")
+
+# Search button click
+search_button = wait.until(
+    EC.element_to_be_clickable((By.ID, "nav-search-submit-button"))
+)
+search_button.click()
+
+# Wait for results
+wait.until(
+    EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Wireless Headphones')]"))
+)
+
+print("Search results for Wireless Headphones displayed successfully")
+time.sleep(10)
+driver.quit()
+
+OUTPUT:
+
+(.venv) PS C:\Wipro Trainee\Selenium\AssignmentCodes\AmazonAssignment> python BasicLocators.py         
+Search results for Wireless Headphones displayed successfully
+
+PROGRAM 3:
+
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver = webdriver.Chrome()
+
+# Implicit Wait
+driver.implicitly_wait(10)
+
+driver.get("https://www.amazon.in")
+driver.maximize_window()
+
+# Search laptop
+search_box = driver.find_element(By.ID, "twotabsearchtextbox")
+search_box.send_keys("Dell Inspiron Laptop")
+driver.find_element(By.XPATH, "//input[@value='Go']").click()
+
+# Explicit Wait for first product image
+wait = WebDriverWait(driver, 15)
+first_product = wait.until(
+    EC.visibility_of_element_located((By.CSS_SELECTOR, "img.s-image"))
+)
+
+# Click first result
+first_product.click()
+
+print("First laptop product opened successfully")
+time.sleep(5)
+driver.quit()
+
+OUTPUT:
+
+(.venv) PS C:\Wipro Trainee\Selenium\AssignmentCodes\AmazonAssignment> python implicitandexplicit.py   
+First laptop product opened successfully
+
+PROGRAM 4:
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
+
+driver = webdriver.Chrome()
+driver.get("https://www.amazon.in")
+driver.maximize_window()
+
+# Scroll to footer
+driver.find_element(By.TAG_NAME, "body").send_keys(Keys.END)
+
+time.sleep(3)
+
+# Click About Us using link text
+about_us = driver.find_element(By.LINK_TEXT, "About Amazon")
+about_us.click()
+
+time.sleep(5)
+
+# Find Careers link and print text
+careers = driver.find_element(By.LINK_TEXT, "Careers")
+print("Element Text:", careers.text)
+
+time.sleep(10)  # Screenshot time
+
+driver.quit()
+
+OUTPUT:
+
+(.venv) PS C:\Wipro Trainee\Selenium\AssignmentCodes\AmazonAssignment> python CSSSelectors.py          
+Element Text: Careers
+
+PROGRAM 5:
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
+
+driver = webdriver.Chrome()
+driver.maximize_window()
+driver.implicitly_wait(10)
+
+# Open Amazon
+driver.get("https://www.amazon.in")
+
+# Search Smart Watches
+search_box = driver.find_element(By.ID, "twotabsearchtextbox")
+search_box.send_keys("Smart Watches")
+
+search_button = driver.find_element(By.ID, "nav-search-submit-button")
+search_button.click()
+
+wait = WebDriverWait(driver, 20)
+
+# Wait for results
+wait.until(
+    EC.presence_of_element_located((By.CSS_SELECTOR, "div.s-main-slot"))
+)
+
+# Scroll to brand section
+driver.execute_script("window.scrollBy(0,1500);")
+time.sleep(3)
+
+# Click boAt brand checkbox
+boat_brand = wait.until(
+    EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'boAt')]"))
+)
+
+driver.execute_script("arguments[0].scrollIntoView();", boat_brand)
+time.sleep(2)
+
+driver.execute_script("arguments[0].click();", boat_brand)
+
+# Wait for filtered results
+time.sleep(5)
+
+# Count products
+products = driver.find_elements(
+    By.CSS_SELECTOR,
+    "div.s-main-slot div[data-component-type='s-search-result']"
+)
+
+print("Number of boAt Smart Watches on first page:", len(products))
+
+time.sleep(10)  # Screenshot time
+
+driver.quit()
+
+OUTPUT:
+
+(.venv) PS C:\Wipro Trainee\Selenium\AssignmentCodes\AmazonAssignment> python Element.py     
+Number of boAt Smart Watches on first page: 16
+
